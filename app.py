@@ -26,7 +26,7 @@ nfl = st.sidebar.slider("Plasma NFL level (Axonal Neurodegeneration)", 0.5, 4.5,
 
 input_vector = np.array([[ptau217, gfap, nfl]])
 predicted_impairment = model.predict(input_vector)
-vulnerability_index = min(max(int((predicted_impairment / 4.0) * 100), 0), 100)
+vulnerability_index = min(max(int((float(predicted_impairment[0]) / 4.0) * 100), 0), 100)
 
 st.metric(label="Predicted Financial Choice Vulnerability Index", value=f"{vulnerability_index}%")
 
