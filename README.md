@@ -40,7 +40,7 @@ Second target checked the same way, MoCA total (c2_mocatots): original Random Fo
 
 **Dataset Source:** Stanford Alzheimer’s Disease Research Center (ADRC) SPHERE Portal (Synthetic Cohort, 2026 Release)
 
-**Author:** [Your Name]
+**Author:** Gunveer Singh
 
 **Field Focus:** Neuroeconomics / Behavioral Economics / Computational Biology
 
