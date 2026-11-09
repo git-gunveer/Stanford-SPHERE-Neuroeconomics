@@ -51,7 +51,7 @@ th{background:#0f172a;color:#fff}
 
 <div class="wrap">
 
-<div class="warn"><strong>First, the honest part, in plain words.</strong><br>
+<div class="warn"><strong>First, the honest part.</strong><br>
 This is learning only. It is <strong>not</strong> medical advice and it is <strong>not</strong> a diagnosis. The data is <strong>synthetic</strong>, fake people made to look like real data, from Stanford ADRC SPHERE. It does not tell you anything about a real person. Do not use it to make health or money decisions.</div>
 
 <div class="card">
@@ -114,6 +114,32 @@ This is learning only. It is <strong>not</strong> medical advice and it is <stro
 <p class="small">How it is calculated, linear model, full 610 people:<br>
 Judgment = -0.136 + 0.640 &times; p-tau217 + 0.002 &times; GFAP + 0.007 &times; NFL<br>
 MoCA = 27.809 - 7.102 &times; p-tau217 - 0.014 &times; GFAP - 0.042 &times; NFL</p>
+</div>
+
+<div class="card">
+<h2>See it: what is happening in the brain?</h2>
+<p>Move the sliders above. Watch the brain change. This is a drawing, not a real brain scan, it just shows the idea.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center">
+<div>
+<svg viewBox="0 0 300 220" width="100%" style="max-width:320px;display:block;margin:0 auto">
+<path id="brainShape" d="M70 130 C50 100 60 60 95 45 C110 20 160 15 190 35 C230 20 270 45 265 80 C285 95 275 125 250 135 C260 160 235 185 200 175 C180 195 130 195 110 175 C85 180 60 160 70 130 Z" fill="#bbf7d0" stroke="#0f172a" stroke-width="3"/>
+<path d="M95 60 C120 50 140 70 135 95 M150 40 C175 55 170 85 155 100 M200 50 C225 60 230 90 215 105 M110 120 C135 110 160 125 165 150 M185 130 C205 120 225 135 220 155" fill="none" stroke="#0f172a" stroke-width="2" opacity="0.5"/>
+<ellipse id="judgSpot" cx="115" cy="75" rx="28" ry="20" fill="#facc15" opacity="0.7"/>
+<text x="115" y="80" text-anchor="middle" font-size="11" font-weight="700">JUDGMENT</text>
+<ellipse cx="205" cy="95" rx="26" ry="18" fill="#93c5fd" opacity="0.6"/>
+<text x="205" y="99" text-anchor="middle" font-size="10" font-weight="700">MEMORY</text>
+</svg>
+<p style="text-align:center"><span id="brainWord" style="font-weight:700">Brain looks calm. Low markers, clearer thinking.</span></p>
+</div>
+<div>
+<p><strong>Blood &rarr; Brain &rarr; Choice</strong></p>
+<p>1. <strong>Blood:</strong> p-tau217, GFAP, NFL go up in the blood.</p>
+<p>2. <strong>Brain:</strong> The front part, where judgment lives, works less well. The yellow spot gets hotter.</p>
+<p>3. <strong>Choice:</strong> Judgment score goes up, MoCA goes down. That means worse decisions, and lower overall thinking.</p>
+<div class="small">The yellow spot is the front of the brain, the part that helps you plan, decide, and stop an impulse buy. That is why this links to money choices, in theory, not in real life yet.</div>
+<p><span class="tag" id="brainTag">Low stress</span></p>
+</div>
+</div>
 </div>
 
 <div class="card">
@@ -209,6 +235,15 @@ function update(){
     moca > 25 ? "Higher than average for this data, mean 23.2." :
     moca > 20 ? "About average for this data, mean 23.2." :
     "Lower than average for this data, mean 23.2.";
+  const brain = document.getElementById('brainShape');
+  const spot = document.getElementById('judgSpot');
+  const word = document.getElementById('brainWord');
+  const tag = document.getElementById('brainTag');
+  if (brain) {
+    if (ptau < 0.2) { brain.setAttribute('fill', '#bbf7d0'); spot.setAttribute('opacity', '0.4'); word.textContent = 'Brain looks calm. Low markers, clearer thinking.'; tag.textContent = 'Low stress'; }
+    else if (ptau < 0.4) { brain.setAttribute('fill', '#fef9c3'); spot.setAttribute('opacity', '0.7'); word.textContent = 'Brain is warming up. Medium markers, average thinking.'; tag.textContent = 'Medium stress'; }
+    else { brain.setAttribute('fill', '#fecaca'); spot.setAttribute('opacity', '1'); word.textContent = 'Brain is under more stress. High markers, worse judgment.'; tag.textContent = 'High stress'; }
+  }
 }
 update();
 </script>
