@@ -3,104 +3,183 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SPHERE Judgment Simulator - Gunveer Singh</title>
+<title>Can Blood Predict Judgment? - SPHERE Simulator by Gunveer Singh</title>
 <style>
-body{font-family:system-ui,Arial,sans-serif;max-width:760px;margin:24px auto;padding:0 16px;color:#111;line-height:1.5}
-h1{font-size:26px;margin-bottom:4px} h2{font-size:19px;margin-top:28px}
-.card{border:1px solid #ddd;border-radius:12px;padding:16px;margin:16px 0;background:#fafafa}
-.big{font-size:32px;font-weight:700}
-label{font-weight:600;display:block;margin-top:14px}
-input[type=range]{width:100%}
-button{padding:8px 12px;margin:6px 6px 0 0;border-radius:8px;border:1px solid #888;background:#fff;cursor:pointer}
-button.active{background:#111;color:#fff}
-.warn{border:2px solid #b00;background:#fff5f5;padding:14px;border-radius:12px}
-table{border-collapse:collapse;width:100%} th,td{border:1px solid #ccc;padding:6px;text-align:left;font-size:14px}
-.small{font-size:13px;color:#444}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,Arial,sans-serif;margin:0;color:#0f172a;line-height:1.6;background:#f1f5f9}
+.hero{background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 55%,#0ea5e9 100%);color:#fff;padding:44px 20px 36px}
+.hero-inner{max-width:900px;margin:0 auto}
+.hero h1{font-size:42px;line-height:1.05;margin:0 0 12px}
+.hero p{font-size:18px;opacity:.92;max-width:640px}
+.pill{display:inline-block;background:#facc15;color:#111;padding:6px 12px;border-radius:999px;font-weight:700;font-size:13px;margin-bottom:14px}
+.wrap{max-width:900px;margin:0 auto;padding:20px 16px 60px}
+.card{background:#fff;border-radius:20px;padding:22px;margin:18px 0;box-shadow:0 8px 30px rgba(15,23,42,.08)}
+h2{font-size:24px;margin:0 0 10px}
+h3{font-size:18px;margin:18px 0 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.mini{background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:16px}
+.mini b{font-size:16px}
+.big{font-size:44px;font-weight:800;line-height:1}
+.gauge{height:14px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin:10px 0}
+.gauge>div{height:100%;background:linear-gradient(90deg,#22c55e,#facc15,#ef4444);transition:width .3s}
+.bar{height:12px;background:#e2e8f0;border-radius:999px;overflow:hidden}
+.bar>div{height:100%;background:#0ea5e9}
+label{font-weight:700;display:block;margin-top:18px}
+input[type=range]{width:100%;accent-color:#0ea5e9;height:28px}
+button{padding:10px 16px;margin:8px 8px 0 0;border-radius:999px;border:0;background:#0f172a;color:#fff;font-weight:700;cursor:pointer}
+button.light{background:#e0f2fe;color:#0c4a6e}
+button:hover{opacity:.9}
+.warn{background:#fef2f2;border:2px solid #ef4444;border-radius:16px;padding:16px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{border:1px solid #e2e8f0;padding:8px;text-align:left}
+th{background:#0f172a;color:#fff}
+.small{font-size:13px;color:#475569}
+.tag{display:inline-block;background:#dcfce7;padding:4px 10px;border-radius:999px;font-size:13px;font-weight:700}
+.steps{counter-reset:s}
+.step{display:flex;gap:14px;margin:14px 0}
+.step span{flex:0 0 36px;height:36px;border-radius:50%;background:#0ea5e9;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+.challenge{background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:16px;padding:16px}
 </style>
 </head>
 <body>
-<h1>SPHERE Judgment Simulator</h1>
-<p>Can blood tell us about judgment? Try it yourself.</p>
+<div class="hero"><div class="hero-inner">
+<span class="pill">STANFORD SPHERE &middot; GRADE 11 RESEARCH &middot; TRY IT YOURSELF</span>
+<h1>Can blood predict<br>how well you judge?</h1>
+<p>Move the sliders. Watch judgment change. No science degree needed. I will explain every word as we go.</p>
+<p><a href="#play" style="color:#facc15;font-weight:700">Play with the simulator &darr;</a> &nbsp; &middot; &nbsp; 610 people &middot; 3 blood markers &middot; 1 big question</p>
+</div></div>
+
+<div class="wrap">
+
+<div class="warn"><strong>First, the honest part, in plain words.</strong><br>
+This is learning only. It is <strong>not</strong> medical advice and it is <strong>not</strong> a diagnosis. The data is <strong>synthetic</strong>, fake people made to look like real data, from Stanford ADRC SPHERE. It does not tell you anything about a real person. Do not use it to make health or money decisions.</div>
 
 <div class="card">
-<h2>My findings, in very simple words</h2>
-<ul>
-<li><strong>My question:</strong> Can 3 things in blood tell us how good a person's judgment is?</li>
-<li><strong>My data:</strong> 610 fake people, made to look like real data. Not real patients.</li>
-<li><strong>What I found:</strong> When p-tau217 goes up, judgment gets worse, and overall thinking goes down.</li>
-<li><strong>What mattered most:</strong> p-tau217. It did about half the work. Then NFL, then GFAP.</li>
-<li><strong>How good was it?</strong> My model explained about 1 in 3 parts of judgment, 34.3%. The other 2 parts are still a mystery.</li>
-<li><strong>A surprise:</strong> The first fancy model learned the practice test too well, train 0.89, test 0.34. I fixed it with a smaller model, max depth 3, at least 5 people per leaf. Now train 0.40, test 0.38, cross-validation 0.30. That is stable.</li>
-<li><strong>New best model:</strong> Tuned Random Forest, 200 trees, depth 3. Judgment test 0.375, MoCA test 0.381. It now matches the simple linear model.</li>
-<li><strong>What this does NOT mean:</strong> It does not prove blood causes bad judgment. It does not diagnose anyone. It does not predict real money choices.</li>
-</ul>
+<h2>New here? Start here, in 60 seconds</h2>
+<div class="steps">
+<div class="step"><span>1</span><div><strong>Your brain makes money choices.</strong> Judgment is how well you think through a choice, solve a problem, and avoid a bad decision.</div></div>
+<div class="step"><span>2</span><div><strong>Blood carries clues.</strong> Three proteins in blood go up or down when the brain is under stress or changing. They are called p-tau217, GFAP, and NFL. Think of them like warning lights on a car dashboard.</div></div>
+<div class="step"><span>3</span><div><strong>My question.</strong> If I only know those 3 blood numbers, can I guess a person's judgment score?</div></div>
+<div class="step"><span>4</span><div><strong>My answer, in short.</strong> Partly, yes. About 1 in 3 parts. The other 2 parts are still a mystery. And p-tau217 matters most.</div></div>
+</div>
+<div class="grid">
+<div class="mini"><b>p-tau217</b><br>The star player. A protein linked to Alzheimer's changes. Higher usually means more brain change. It did about half the work in my model.</div>
+<div class="mini"><b>GFAP</b><br>A stress signal from brain support cells. Think of it as the brain's repair crew working overtime.</div>
+<div class="mini"><b>NFL</b><br>A signal that brain wires are getting damaged. Think of it as frayed cables.</div>
+</div>
 </div>
 
-<div class="warn"><strong>Learning only. Not medical advice. Not a diagnosis.</strong><br>
-This uses synthetic Stanford ADRC SPHERE data, 610 people, not real patients. It does not tell you anything about a real person. Do not use it to make health or money decisions.</div>
-
-<div class="card">
-<h2>1. Pick a blood profile</h2>
+<div class="card" id="play">
+<h2>Play: build a person, see the prediction</h2>
+<p>Pick Low, Medium, or High, then move the sliders yourself. The numbers update live.</p>
 <p>
 <button onclick="setPreset('low')">Low markers</button>
 <button onclick="setPreset('mid')">Medium markers</button>
 <button onclick="setPreset('high')">High markers</button>
+<button class="light" onclick="setPreset('story')">Try the story: low to high</button>
 </p>
-<label>p-tau217: <span id="ptauVal">0.28</span></label>
+
+<label>p-tau217 &mdash; the star player &nbsp; <span id="ptauVal">0.28</span></label>
 <input type="range" id="ptau" min="0" max="1.5" step="0.01" value="0.28" oninput="update()">
-<label>GFAP: <span id="gfapVal">72</span></label>
+<div class="small">Low 0.12 &middot; Medium 0.28 &middot; High 0.53 &middot; Range in data: -1.25 to 2.53</div>
+
+<label>GFAP &mdash; brain stress &nbsp; <span id="gfapVal">72</span></label>
 <input type="range" id="gfap" min="20" max="120" step="1" value="72" oninput="update()">
-<label>NFL: <span id="nflVal">25</span></label>
+<div class="small">Low 50 &middot; Medium 72 &middot; High 94</div>
+
+<label>NFL &mdash; wire damage &nbsp; <span id="nflVal">25</span></label>
 <input type="range" id="nfl" min="5" max="50" step="1" value="25" oninput="update()">
-<p class="small">Typical values in the data: p-tau217 median 0.28, GFAP median 72, NFL median 25. Low = 25th percentile, Medium = median, High = 75th percentile.</p>
+<div class="small">Low 18 &middot; Medium 25 &middot; High 33</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px">
+<div style="background:#f8fafc;border-radius:16px;padding:16px">
+<div class="small">PREDICTED JUDGMENT SCORE</div>
+<div class="big" id="judg">0.32</div>
+<div class="gauge"><div id="judgBar" style="width:35%"></div></div>
+<div id="judgWord">About average. Higher means worse judgment.</div>
+<div class="small">Average in the data: 0.37. Range: -2.12 to 2.71.</div>
+</div>
+<div style="background:#f0fdf4;border-radius:16px;padding:16px">
+<div class="small">PREDICTED MoCA TOTAL &mdash; OVERALL THINKING</div>
+<div class="big" id="moca">23.8</div>
+<div class="gauge"><div id="mocaBar" style="width:55%"></div></div>
+<div id="mocaWord">About average for this data, mean 23.2.</div>
+<div class="small">Higher MoCA is better. Average: 23.2. Range: -0.8 to 41.3.</div>
+</div>
+</div>
+
+<div class="challenge">
+<strong>Try this challenge:</strong> Keep GFAP and NFL at Medium. Move only p-tau217 from Low to High. What happens? Judgment should go up, MoCA should go down. That one move is my whole finding.
+</div>
+<p class="small">How it is calculated, linear model, full 610 people:<br>
+Judgment = -0.136 + 0.640 &times; p-tau217 + 0.002 &times; GFAP + 0.007 &times; NFL<br>
+MoCA = 27.809 - 7.102 &times; p-tau217 - 0.014 &times; GFAP - 0.042 &times; NFL</p>
 </div>
 
 <div class="card">
-<h2>2. What the model predicts</h2>
-<p>Predicted judgment score, b4_judgment: <span class="big" id="judg">0.37</span></p>
-<p id="judgWord">About average. Higher means worse judgment.</p>
-<p>Predicted MoCA total, c2_mocatots: <span class="big" id="moca">23.2</span></p>
-<p id="mocaWord">About average for this synthetic data, mean 23.2.</p>
-<p class="small">Formulas, from the full 610 people, linear regression:<br>
-Judgment = -0.136 + 0.640 x p-tau217 + 0.002 x GFAP + 0.007 x NFL<br>
-MoCA total = 27.809 - 7.102 x p-tau217 - 0.014 x GFAP - 0.042 x NFL</p>
+<h2>My findings, in very simple words</h2>
+<ul>
+<li><strong>When p-tau217 goes up, judgment gets worse.</strong> Correlation +0.537. That is the strongest link I found.</li>
+<li><strong>When p-tau217 goes up, overall thinking goes down.</strong> MoCA correlation -0.541.</li>
+<li><strong>p-tau217 mattered most.</strong> In the first Random Forest, 51.7%. Then NFL 27.5%, then GFAP 20.9%.</li>
+<li><strong>How good was it?</strong> About 1 in 3 parts explained. Tuned model: judgment test 0.375, MoCA test 0.381. That means 37.5% and 38.1%.</li>
+<li><strong>The fix that made it better:</strong> My first fancy model memorized the practice data, train 0.89, test 0.34. I made it smaller, depth 3, at least 5 people per leaf, 200 trees. Now train 0.40, test 0.38. Stable.</li>
+<li><strong>The simple model was just as good.</strong> Linear regression: judgment cross-validation 0.304, MoCA 0.279. Same as the tuned Random Forest. Simple can win.</li>
+</ul>
+<h3>What mattered most, visually</h3>
+<p>p-tau217 &mdash; 51.7%</p><div class="bar"><div style="width:51.7%"></div></div>
+<p>NFL &mdash; 27.5%</p><div class="bar"><div style="width:27.5%"></div></div>
+<p>GFAP &mdash; 20.9%</p><div class="bar"><div style="width:20.9%"></div></div>
 </div>
 
 <div class="card">
-<h2>3. Try changing one thing</h2>
-<p>Keep GFAP and NFL at medium, and move p-tau217 from low to high. Watch judgment go up and MoCA go down. That is the main pattern in the data: higher p-tau217, worse judgment and lower overall cognition. P-tau217 mattered most in the Random Forest too, 51.7% of the importance.</p>
-</div>
-
-<div class="card">
-<h2>4. How good is the model, honestly?</h2>
+<h2>How good is it, honestly? The full scoreboard</h2>
+<p>R2 means variance explained. 0.375 means 37.5%. I tested each model 5 times, on different slices, called 5-fold cross-validation. That is the honest score, not just one lucky split.</p>
 <table>
-<tr><th>Target</th><th>Model</th><th>Test R2</th><th>5-fold R2 mean</th></tr>
-<tr><td>Judgment</td><td>Random Forest</td><td>0.343</td><td>0.249</td></tr>
+<tr><th>Target</th><th>Model</th><th>Test R2</th><th>5-fold R2</th></tr>
+<tr><td>Judgment</td><td>Original Random Forest</td><td>0.343</td><td>0.249</td></tr>
+<tr><td>Judgment</td><td><strong>Tuned Random Forest, depth 3</strong></td><td><strong>0.375</strong></td><td><strong>0.304</strong></td></tr>
 <tr><td>Judgment</td><td>Linear</td><td>0.370</td><td>0.304</td></tr>
-<tr><td>MoCA total</td><td>Random Forest</td><td>0.347</td><td>0.194</td></tr>
+<tr><td>MoCA total</td><td>Original Random Forest</td><td>0.347</td><td>0.194</td></tr>
+<tr><td>MoCA total</td><td><strong>Tuned Random Forest, depth 3</strong></td><td><strong>0.381</strong></td><td><strong>0.279</strong></td></tr>
 <tr><td>MoCA total</td><td>Linear</td><td>0.424</td><td>0.279</td></tr>
-<tr><td>Serial 7s</td><td>Random Forest</td><td>0.261</td><td>0.107</td></tr>
-<tr><td>Serial 7s</td><td>Linear</td><td>0.328</td><td>0.171</td></tr>
+<tr><td>Serial 7s, math</td><td>Linear</td><td>0.328</td><td>0.171</td></tr>
 </table>
-<p class="small">R2 is variance explained. 0.343 means 34.3%. Random Forest train R2 was about 0.89, test R2 only about 0.34, so it overfits. The linear model is simpler and more stable, which is why this simulator uses it.</p>
+<p><span class="tag">What I learned</span> &nbsp; A smaller, simpler model can beat a big fancy one when the data is small. That is a real research lesson, not a failure.</p>
 </div>
 
 <div class="card">
-<h2>5. What this does NOT do</h2>
+<h2>What is judgment? What is MoCA? A quick glossary</h2>
+<div class="grid">
+<div class="mini"><b>Judgment, b4_judgment</b><br>A doctor's score for how well a person makes decisions and solves problems. Higher = worse. Average 0.37.</div>
+<div class="mini"><b>MoCA total</b><br>A short thinking test, out of 30 in real life. Here it is a score in the data. Higher = better thinking. Average 23.2.</div>
+<div class="mini"><b>Serial 7s</b><br>Count backwards by 7s: 100, 93, 86... It tests math and focus. My model was worst here, only 0.17 in cross-validation.</div>
+<div class="mini"><b>R2, variance explained</b><br>If R2 is 0.38, the model explains 38% of the differences between people. The rest is other stuff I did not measure.</div>
+<div class="mini"><b>Train vs test</b><br>Train = practice questions the model saw. Test = new questions it never saw. If train is much higher than test, the model memorized, it did not learn.</div>
+<div class="mini"><b>5-fold cross-validation</b><br>Split the data into 5 parts, test on each part in turn, average the score. Harder to get lucky.</div>
+</div>
+</div>
+
+<div class="card">
+<h2>What this does NOT do</h2>
 <ul>
 <li>It does not use real patient data. All IDs are Synthetic, like Synthetic537.</li>
-<li>It does not prove p-tau217 causes bad judgment. Correlation is not cause.</li>
-<li>It does not diagnose Alzheimer’s or any disease.</li>
+<li>It does not prove p-tau217 causes bad judgment. Two things moving together is not proof one causes the other.</li>
+<li>It does not diagnose Alzheimer's or any disease.</li>
 <li>It does not predict real money decisions, only test scores in synthetic data.</li>
+<li>It does not work for one person alone. It is about patterns across 610 people.</li>
 </ul>
-<p class="small">Data: Stanford ADRC SPHERE, synthetic cohort, 2026 release. Biomarkers 618 people, cognitive scores 634 people, joined 610 people. Code and full results: GitHub git-gunveer/Stanford-SPHERE-Neuroeconomics, and the 1-page summary in my research portfolio.</p>
+<p class="small">Data: Stanford ADRC SPHERE, synthetic cohort, 2026 release. Biomarkers 618 people, cognitive scores 634 people, joined 610 people. Code: GitHub git-gunveer/Stanford-SPHERE-Neuroeconomics. Live app: stanford-sphere-neuroeconomics-mpbb5h9ldekbksgpqjvy3p.streamlit.app. By Gunveer Singh, Grade 11, Castlebrooke Secondary School. Research portfolio only, not published.</p>
+</div>
+
 </div>
 
 <script>
 const presets = {
   low: {ptau: 0.12, gfap: 50, nfl: 18},
   mid: {ptau: 0.28, gfap: 72, nfl: 25},
-  high: {ptau: 0.53, gfap: 94, nfl: 33}
+  high: {ptau: 0.53, gfap: 94, nfl: 33},
+  story: {ptau: 0.53, gfap: 72, nfl: 25}
 };
 function setPreset(name){
   const p = presets[name];
@@ -120,14 +199,16 @@ function update(){
   const moca = 27.8087 - 7.1016*ptau - 0.0141*gfap - 0.0424*nfl;
   document.getElementById('judg').textContent = judg.toFixed(2);
   document.getElementById('moca').textContent = moca.toFixed(1);
+  document.getElementById('judgBar').style.width = Math.max(5, Math.min(95, ((judg + 2) / 5) * 100)) + '%';
+  document.getElementById('mocaBar').style.width = Math.max(5, Math.min(95, (moca / 40) * 100)) + '%';
   document.getElementById('judgWord').textContent =
-    judg < 0.1 ? "Low. Better judgment than average in this synthetic data." :
+    judg < 0.1 ? "Low. Better judgment than average in this data." :
     judg < 0.6 ? "About average. Higher means worse judgment." :
-    "High. Worse judgment than average in this synthetic data.";
+    "High. Worse judgment than average in this data.";
   document.getElementById('mocaWord').textContent =
-    moca > 25 ? "Higher than average for this synthetic data, mean 23.2." :
-    moca > 20 ? "About average for this synthetic data, mean 23.2." :
-    "Lower than average for this synthetic data, mean 23.2.";
+    moca > 25 ? "Higher than average for this data, mean 23.2." :
+    moca > 20 ? "About average for this data, mean 23.2." :
+    "Lower than average for this data, mean 23.2.";
 }
 update();
 </script>
