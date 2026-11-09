@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPHERE Judgment Simulator - Gunveer Singh</title>
+<style>
+body{font-family:system-ui,Arial,sans-serif;max-width:760px;margin:24px auto;padding:0 16px;color:#111;line-height:1.5}
+h1{font-size:26px;margin-bottom:4px} h2{font-size:19px;margin-top:28px}
+.card{border:1px solid #ddd;border-radius:12px;padding:16px;margin:16px 0;background:#fafafa}
+.big{font-size:32px;font-weight:700}
+label{font-weight:600;display:block;margin-top:14px}
+input[type=range]{width:100%}
+button{padding:8px 12px;margin:6px 6px 0 0;border-radius:8px;border:1px solid #888;background:#fff;cursor:pointer}
+button.active{background:#111;color:#fff}
+.warn{border:2px solid #b00;background:#fff5f5;padding:14px;border-radius:12px}
+table{border-collapse:collapse;width:100%} th,td{border:1px solid #ccc;padding:6px;text-align:left;font-size:14px}
+.small{font-size:13px;color:#444}
+</style>
+</head>
+<body>
+<h1>SPHERE Judgment Simulator</h1>
+<p>Can blood tell us about judgment? Try it yourself.</p>
+
+<div class="card">
+<h2>My findings, in very simple words</h2>
+<ul>
+<li><strong>My question:</strong> Can 3 things in blood tell us how good a person's judgment is?</li>
+<li><strong>My data:</strong> 610 fake people, made to look like real data. Not real patients.</li>
+<li><strong>What I found:</strong> When p-tau217 goes up, judgment gets worse, and overall thinking goes down.</li>
+<li><strong>What mattered most:</strong> p-tau217. It did about half the work. Then NFL, then GFAP.</li>
+<li><strong>How good was it?</strong> My model explained about 1 in 3 parts of judgment, 34.3%. The other 2 parts are still a mystery.</li>
+<li><strong>A surprise:</strong> The simple model did better than the fancy model when I tested it 5 times. The fancy model learned the practice test too well, and did worse on new data.</li>
+<li><strong>What this does NOT mean:</strong> It does not prove blood causes bad judgment. It does not diagnose anyone. It does not predict real money choices.</li>
+</ul>
+</div>
+
+<div class="warn"><strong>Learning only. Not medical advice. Not a diagnosis.</strong><br>
+This uses synthetic Stanford ADRC SPHERE data, 610 people, not real patients. It does not tell you anything about a real person. Do not use it to make health or money decisions.</div>
+
+<div class="card">
+<h2>1. Pick a blood profile</h2>
+<p>
+<button onclick="setPreset('low')">Low markers</button>
+<button onclick="setPreset('mid')">Medium markers</button>
+<button onclick="setPreset('high')">High markers</button>
+</p>
+<label>p-tau217: <span id="ptauVal">0.28</span></label>
+<input type="range" id="ptau" min="0" max="1.5" step="0.01" value="0.28" oninput="update()">
+<label>GFAP: <span id="gfapVal">72</span></label>
+<input type="range" id="gfap" min="20" max="120" step="1" value="72" oninput="update()">
+<label>NFL: <span id="nflVal">25</span></label>
+<input type="range" id="nfl" min="5" max="50" step="1" value="25" oninput="update()">
+<p class="small">Typical values in the data: p-tau217 median 0.28, GFAP median 72, NFL median 25. Low = 25th percentile, Medium = median, High = 75th percentile.</p>
+</div>
+
+<div class="card">
+<h2>2. What the model predicts</h2>
+<p>Predicted judgment score, b4_judgment: <span class="big" id="judg">0.37</span></p>
+<p id="judgWord">About average. Higher means worse judgment.</p>
+<p>Predicted MoCA total, c2_mocatots: <span class="big" id="moca">23.2</span></p>
+<p id="mocaWord">About average for this synthetic data, mean 23.2.</p>
+<p class="small">Formulas, from the full 610 people, linear regression:<br>
+Judgment = -0.136 + 0.640 x p-tau217 + 0.002 x GFAP + 0.007 x NFL<br>
+MoCA total = 27.809 - 7.102 x p-tau217 - 0.014 x GFAP - 0.042 x NFL</p>
+</div>
+
+<div class="card">
+<h2>3. Try changing one thing</h2>
+<p>Keep GFAP and NFL at medium, and move p-tau217 from low to high. Watch judgment go up and MoCA go down. That is the main pattern in the data: higher p-tau217, worse judgment and lower overall cognition. P-tau217 mattered most in the Random Forest too, 51.7% of the importance.</p>
+</div>
+
+<div class="card">
+<h2>4. How good is the model, honestly?</h2>
+<table>
+<tr><th>Target</th><th>Model</th><th>Test R2</th><th>5-fold R2 mean</th></tr>
+<tr><td>Judgment</td><td>Random Forest</td><td>0.343</td><td>0.249</td></tr>
+<tr><td>Judgment</td><td>Linear</td><td>0.370</td><td>0.304</td></tr>
+<tr><td>MoCA total</td><td>Random Forest</td><td>0.347</td><td>0.194</td></tr>
+<tr><td>MoCA total</td><td>Linear</td><td>0.424</td><td>0.279</td></tr>
+<tr><td>Serial 7s</td><td>Random Forest</td><td>0.261</td><td>0.107</td></tr>
+<tr><td>Serial 7s</td><td>Linear</td><td>0.328</td><td>0.171</td></tr>
+</table>
+<p class="small">R2 is variance explained. 0.343 means 34.3%. Random Forest train R2 was about 0.89, test R2 only about 0.34, so it overfits. The linear model is simpler and more stable, which is why this simulator uses it.</p>
+</div>
+
+<div class="card">
+<h2>5. What this does NOT do</h2>
+<ul>
+<li>It does not use real patient data. All IDs are Synthetic, like Synthetic537.</li>
+<li>It does not prove p-tau217 causes bad judgment. Correlation is not cause.</li>
+<li>It does not diagnose Alzheimer’s or any disease.</li>
+<li>It does not predict real money decisions, only test scores in synthetic data.</li>
+</ul>
+<p class="small">Data: Stanford ADRC SPHERE, synthetic cohort, 2026 release. Biomarkers 618 people, cognitive scores 634 people, joined 610 people. Code and full results: GitHub git-gunveer/Stanford-SPHERE-Neuroeconomics, and the 1-page summary in my research portfolio.</p>
+</div>
+
+<script>
+const presets = {
+  low: {ptau: 0.12, gfap: 50, nfl: 18},
+  mid: {ptau: 0.28, gfap: 72, nfl: 25},
+  high: {ptau: 0.53, gfap: 94, nfl: 33}
+};
+function setPreset(name){
+  const p = presets[name];
+  document.getElementById('ptau').value = p.ptau;
+  document.getElementById('gfap').value = p.gfap;
+  document.getElementById('nfl').value = p.nfl;
+  update();
+}
+function update(){
+  const ptau = parseFloat(document.getElementById('ptau').value);
+  const gfap = parseFloat(document.getElementById('gfap').value);
+  const nfl = parseFloat(document.getElementById('nfl').value);
+  document.getElementById('ptauVal').textContent = ptau.toFixed(2);
+  document.getElementById('gfapVal').textContent = gfap;
+  document.getElementById('nflVal').textContent = nfl;
+  const judg = -0.1357 + 0.6397*ptau + 0.0015*gfap + 0.0068*nfl;
+  const moca = 27.8087 - 7.1016*ptau - 0.0141*gfap - 0.0424*nfl;
+  document.getElementById('judg').textContent = judg.toFixed(2);
+  document.getElementById('moca').textContent = moca.toFixed(1);
+  document.getElementById('judgWord').textContent =
+    judg < 0.1 ? "Low. Better judgment than average in this synthetic data." :
+    judg < 0.6 ? "About average. Higher means worse judgment." :
+    "High. Worse judgment than average in this synthetic data.";
+  document.getElementById('mocaWord').textContent =
+    moca > 25 ? "Higher than average for this synthetic data, mean 23.2." :
+    moca > 20 ? "About average for this synthetic data, mean 23.2." :
+    "Lower than average for this synthetic data, mean 23.2.";
+}
+update();
+</script>
+</body>
+</html>
