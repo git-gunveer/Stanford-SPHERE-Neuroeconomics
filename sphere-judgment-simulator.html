@@ -256,26 +256,22 @@ function update(){
   const img = document.getElementById('brainImg');
   const word = document.getElementById('brainWord');
   const tag = document.getElementById('brainTag');
-  const state = document.getElementById('brainState');
   if (heat) {
     if (ptau < 0.2) {
       heat.style.opacity = '0';
       if (img) img.style.filter = 'none';
       word.textContent = 'Brain looks calm. Low markers, clearer thinking.';
       tag.textContent = 'Low stress';
-      if (state) { state.textContent = 'BRAIN: CALM'; state.style.background = '#22c55e'; }
     } else if (ptau < 0.4) {
       heat.style.opacity = '0.6';
       if (img) img.style.filter = 'sepia(0.4) saturate(2) hue-rotate(-25deg)';
       word.textContent = 'Brain is warming up. Medium markers, average thinking.';
       tag.textContent = 'Medium stress';
-      if (state) { state.textContent = 'BRAIN: WARMING UP'; state.style.background = '#f59e0b'; }
     } else {
       heat.style.opacity = '1';
       if (img) img.style.filter = 'sepia(0.8) saturate(3.5) hue-rotate(-35deg) brightness(0.92)';
       word.textContent = 'Brain is under more stress. High markers, worse judgment.';
       tag.textContent = 'High stress';
-      if (state) { state.textContent = 'BRAIN: STRESSED - HOT'; state.style.background = '#ef4444'; }
     }
   }
 }
