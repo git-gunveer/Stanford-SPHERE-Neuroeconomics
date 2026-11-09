@@ -30,7 +30,8 @@ table{border-collapse:collapse;width:100%} th,td{border:1px solid #ccc;padding:6
 <li><strong>What I found:</strong> When p-tau217 goes up, judgment gets worse, and overall thinking goes down.</li>
 <li><strong>What mattered most:</strong> p-tau217. It did about half the work. Then NFL, then GFAP.</li>
 <li><strong>How good was it?</strong> My model explained about 1 in 3 parts of judgment, 34.3%. The other 2 parts are still a mystery.</li>
-<li><strong>A surprise:</strong> The simple model did better than the fancy model when I tested it 5 times. The fancy model learned the practice test too well, and did worse on new data.</li>
+<li><strong>A surprise:</strong> The first fancy model learned the practice test too well, train 0.89, test 0.34. I fixed it with a smaller model, max depth 3, at least 5 people per leaf. Now train 0.40, test 0.38, cross-validation 0.30. That is stable.</li>
+<li><strong>New best model:</strong> Tuned Random Forest, 200 trees, depth 3. Judgment test 0.375, MoCA test 0.381. It now matches the simple linear model.</li>
 <li><strong>What this does NOT mean:</strong> It does not prove blood causes bad judgment. It does not diagnose anyone. It does not predict real money choices.</li>
 </ul>
 </div>

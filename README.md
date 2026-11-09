@@ -23,9 +23,18 @@ Re-ran the same model on the same Drive data, with proper 5-fold cross-validatio
 
 5-fold cross-validation, Random Forest: R2 mean 0.249, standard deviation 0.105, folds 0.362, 0.205, 0.260, 0.074, 0.345. Linear regression: R2 mean 0.304, standard deviation 0.056.
 
-Honest note: Random Forest beats guessing the average, but on cross-validation it does not beat the simple linear model, and its train R2 of 0.890 vs test R2 of 0.343 shows overfitting. The simulator uses the linear model for that reason.
+Honest note: the original Random Forest beats guessing the average, but on cross-validation it does not beat the simple linear model, and its train R2 of 0.890 vs test R2 of 0.343 shows overfitting. The simulator uses the linear model for that reason.
 
-Second target checked the same way, MoCA total (c2_mocatots): Random Forest test R2 0.347, cross-validation mean 0.194; Linear test R2 0.424, cross-validation mean 0.279.
+## Tuned model, fixed 2026-11-09
+
+Tested 9 models. Best stable model: Random Forest, 200 trees, max depth 3, min samples per leaf 5.
+
+- Judgment: train R2 0.404, test R2 0.375, test RMSE 0.489, 5-fold R2 mean 0.304, SD 0.068
+- MoCA total: train R2 0.371, test R2 0.381, test RMSE 5.305, 5-fold R2 mean 0.279, SD 0.081
+
+Train-test gap is now 0.029 for judgment, not 0.547. The tuned model now matches the linear model on cross-validation. Full results in tuned_models.json in the portfolio, not in this repo yet.
+
+Second target checked the same way, MoCA total (c2_mocatots): original Random Forest test R2 0.347, cross-validation mean 0.194; Linear test R2 0.424, cross-validation mean 0.279.
 
 # Multimodal Neuroeconomics Modeling: Predicting Judgment Loss via Blood Biomarkers
 

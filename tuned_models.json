@@ -1,0 +1,150 @@
+{
+  "b4_judgment": {
+    "linear": {
+      "train_R2": 0.303,
+      "test_R2": 0.37,
+      "test_RMSE": 0.491,
+      "cv_R2_mean": 0.304,
+      "cv_R2_sd": 0.056,
+      "cv_RMSE_mean": 0.496
+    },
+    "ridge_a1": {
+      "train_R2": 0.303,
+      "test_R2": 0.368,
+      "test_RMSE": 0.492,
+      "cv_R2_mean": 0.304,
+      "cv_R2_sd": 0.054,
+      "cv_RMSE_mean": 0.496
+    },
+    "ridge_a10": {
+      "train_R2": 0.301,
+      "test_R2": 0.351,
+      "test_RMSE": 0.498,
+      "cv_R2_mean": 0.302,
+      "cv_R2_sd": 0.046,
+      "cv_RMSE_mean": 0.497
+    },
+    "rf_orig_dNone_leaf1": {
+      "train_R2": 0.89,
+      "test_R2": 0.343,
+      "test_RMSE": 0.501,
+      "cv_R2_mean": 0.249,
+      "cv_R2_sd": 0.105,
+      "cv_RMSE_mean": 0.514
+    },
+    "rf_d5_leaf5": {
+      "train_R2": 0.492,
+      "test_R2": 0.357,
+      "test_RMSE": 0.496,
+      "cv_R2_mean": 0.291,
+      "cv_R2_sd": 0.078,
+      "cv_RMSE_mean": 0.5
+    },
+    "rf_d3_leaf5": {
+      "train_R2": 0.404,
+      "test_R2": 0.375,
+      "test_RMSE": 0.489,
+      "cv_R2_mean": 0.304,
+      "cv_R2_sd": 0.068,
+      "cv_RMSE_mean": 0.496
+    },
+    "rf_d5_leaf10": {
+      "train_R2": 0.436,
+      "test_R2": 0.385,
+      "test_RMSE": 0.485,
+      "cv_R2_mean": 0.295,
+      "cv_R2_sd": 0.077,
+      "cv_RMSE_mean": 0.499
+    },
+    "rf_d10_leaf5": {
+      "train_R2": 0.592,
+      "test_R2": 0.356,
+      "test_RMSE": 0.496,
+      "cv_R2_mean": 0.28,
+      "cv_R2_sd": 0.093,
+      "cv_RMSE_mean": 0.504
+    },
+    "gb_d3": {
+      "train_R2": 0.705,
+      "test_R2": 0.326,
+      "test_RMSE": 0.508,
+      "cv_R2_mean": 0.274,
+      "cv_R2_sd": 0.077,
+      "cv_RMSE_mean": 0.507
+    }
+  },
+  "c2_mocatots": {
+    "linear": {
+      "train_R2": 0.266,
+      "test_R2": 0.424,
+      "test_RMSE": 5.119,
+      "cv_R2_mean": 0.279,
+      "cv_R2_sd": 0.099,
+      "cv_RMSE_mean": 5.276
+    },
+    "ridge_a1": {
+      "train_R2": 0.266,
+      "test_R2": 0.422,
+      "test_RMSE": 5.13,
+      "cv_R2_mean": 0.279,
+      "cv_R2_sd": 0.098,
+      "cv_RMSE_mean": 5.276
+    },
+    "ridge_a10": {
+      "train_R2": 0.264,
+      "test_R2": 0.401,
+      "test_RMSE": 5.222,
+      "cv_R2_mean": 0.278,
+      "cv_R2_sd": 0.084,
+      "cv_RMSE_mean": 5.286
+    },
+    "rf_orig_dNone_leaf1": {
+      "train_R2": 0.884,
+      "test_R2": 0.347,
+      "test_RMSE": 5.45,
+      "cv_R2_mean": 0.194,
+      "cv_R2_sd": 0.09,
+      "cv_RMSE_mean": 5.584
+    },
+    "rf_d5_leaf5": {
+      "train_R2": 0.474,
+      "test_R2": 0.375,
+      "test_RMSE": 5.331,
+      "cv_R2_mean": 0.263,
+      "cv_R2_sd": 0.076,
+      "cv_RMSE_mean": 5.341
+    },
+    "rf_d3_leaf5": {
+      "train_R2": 0.371,
+      "test_R2": 0.381,
+      "test_RMSE": 5.305,
+      "cv_R2_mean": 0.279,
+      "cv_R2_sd": 0.081,
+      "cv_RMSE_mean": 5.284
+    },
+    "rf_d5_leaf10": {
+      "train_R2": 0.423,
+      "test_R2": 0.367,
+      "test_RMSE": 5.367,
+      "cv_R2_mean": 0.256,
+      "cv_R2_sd": 0.075,
+      "cv_RMSE_mean": 5.369
+    },
+    "rf_d10_leaf5": {
+      "train_R2": 0.578,
+      "test_R2": 0.369,
+      "test_RMSE": 5.359,
+      "cv_R2_mean": 0.233,
+      "cv_R2_sd": 0.082,
+      "cv_RMSE_mean": 5.45
+    },
+    "gb_d3": {
+      "train_R2": 0.646,
+      "test_R2": 0.305,
+      "test_RMSE": 5.622,
+      "cv_R2_mean": 0.223,
+      "cv_R2_sd": 0.077,
+      "cv_RMSE_mean": 5.489
+    }
+  }
+}
